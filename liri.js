@@ -167,18 +167,23 @@ function Movie(title, year, rating, tomatoes, country, language, plot, actors) {
 };
 
 function doWhat() {
-    fs.readFile("random.txt", "utf8", function(error, data) {
-        
+    fs.readFile("random.txt", "utf8", function (error, data) {
+
         var instructions = data.split(",");
-        var instructionsString = "$ node liri.js " + instructions.join(" ");
+        
 
-        if (instructionsString.length === 2) {
-            action = instructionsString[0] + instructionsString[1];
-          } else if (instructionsString.length === 1) {
-            action = instructionsString[0];
-          }
+        if (instructions.length === 2) {
+            action = instructions[0]; 
+            input = instructions[1];
+        } else if (instructions.length === 1) {
+            action = instructions[0];
+        }
 
-          console.log(instructionsString);
+        
+        console.log(action + " " + input);
+
+        spotifyThisSong("i+want+it+that+way");
+        
     });
 };
 
@@ -191,4 +196,6 @@ if (action === "concert-this") {
     movieThis(input);
 } else if (action === "do-what-it-says") {
     doWhat();
+} else {
+    console.log("Liri does not recognize this command.");
 };
